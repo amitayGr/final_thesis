@@ -1,0 +1,35 @@
+{
+    "folders": [
+        {
+            "name": "🏠 Project Root",
+            "path": "."
+        },
+        {
+            "name": "🔧 Backend Service",
+            "path": "backend_service"
+        },
+        {
+            "name": "🎨 Frontend Service",
+            "path": "frontend_service"
+        },
+        {
+            "name": "📊 Logs",
+            "path": "logs"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            "**/flask_session": true
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "ms-python.debugpy",
+            "humao.rest-client"
+        ]
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Backend Service",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend_service/app.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/backend_service",
+            "env": {
+                "FLASK_APP": "app.py",
+                "FLASK_ENV": "development",
+                "BACKEND_DEBUG": "True",
+                "BACKEND_PORT": "5001",
+                "BACKEND_LOG_LEVEL": "DEBUG"
+            },
+            "justMyCode": true,
+            "purpose": ["debug-in-terminal"]
+        },
+        {
+            "name": "Frontend Service",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/frontend_service/app.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/frontend_service",
+            "env": {
+                "FLASK_APP": "app.py",
+                "FLASK_ENV": "development",
+                "FRONTEND_DEBUG": "True",
+                "FRONTEND_PORT": "5000",
+                "FRONTEND_LOG_LEVEL": "DEBUG",
+                "BACKEND_SERVICE_URL": "http://localhost:5001"
+            },
+            "justMyCode": true,
+            "purpose": ["debug-in-terminal"]
+        },
+        {
+            "name": "Backend API Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend_service/test_api.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/backend_service",
+            "justMyCode": true,
+            "purpose": ["debug-test"]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Full Stack (Frontend + Backend)",
+            "configurations": [
+                "Backend Service",
+                "Frontend Service"
+            ],
+            "stopAll": true,
+            "preLaunchTask": "Check Python"
+        }
+    ]
+}

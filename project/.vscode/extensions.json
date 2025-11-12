@@ -1,0 +1,33 @@
+{
+    "recommendations": [
+        // Python development
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        
+        // Flask development
+        "wholroyd.jinja",
+        
+        // Database tools
+        "alexcvzz.vscode-sqlite",
+        
+        // REST API testing
+        "humao.rest-client",
+        
+        // Git
+        "eamodio.gitlens",
+        
+        // Markdown
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        
+        // General productivity
+        "ms-vscode.powershell",
+        "streetsidesoftware.code-spell-checker",
+        "aaron-bond.better-comments",
+        "oderwat.indent-rainbow",
+        
+        // File icons
+        "vscode-icons-team.vscode-icons"
+    ]
+}

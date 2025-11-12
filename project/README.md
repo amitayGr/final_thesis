@@ -9,6 +9,7 @@ A unified system combining a user-friendly frontend with an intelligent adaptive
 - [Project Structure](#project-structure)
 - [Setup Instructions](#setup-instructions)
 - [Running the Application](#running-the-application)
+- [VS Code Integration](#vs-code-integration)
 - [API Documentation](#api-documentation)
 - [Logging](#logging)
 - [Testing](#testing)
@@ -210,7 +211,59 @@ Open your browser and navigate to:
 
 ---
 
-## 📚 API Documentation
+## � VS Code Integration
+
+This project includes complete VS Code configuration for easy development.
+
+### Quick Start with VS Code
+
+1. **Open Project:**
+   ```bash
+   code c:\Users\lahavor\am\final_thesis\project
+   ```
+
+2. **Install Recommended Extensions:**
+   - VS Code will prompt you to install recommended extensions
+   - Click "Install All"
+
+3. **Run Application:**
+   - Press `F5`
+   - Select "Full Stack (Frontend + Backend)"
+   - Both services start with debugging enabled
+
+### Available Features
+
+#### Debug Configurations (F5)
+- **Full Stack** - Run both services simultaneously
+- **Backend Service** - Debug backend only
+- **Frontend Service** - Debug frontend only
+- **Backend API Tests** - Debug test suite
+
+#### Tasks (Ctrl+Shift+P → "Tasks")
+- Install Dependencies
+- Start/Stop Services
+- Run Tests
+- View Logs (real-time)
+- Open Browser
+- Clean Logs
+
+#### API Testing
+- Open `api_tests.http`
+- Click "Send Request" to test endpoints
+- Complete workflow examples included
+
+### VS Code Documentation
+
+See [`.vscode/README.md`](.vscode/README.md) for complete VS Code configuration guide including:
+- All keyboard shortcuts
+- Task reference
+- Debugging guide
+- Customization options
+- Troubleshooting
+
+---
+
+## �📚 API Documentation
 
 ### Backend Service Endpoints
 
