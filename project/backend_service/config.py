@@ -10,9 +10,13 @@ class Config:
     PORT = int(os.environ.get('BACKEND_PORT', 5001))
     DEBUG = os.environ.get('BACKEND_DEBUG', 'False').lower() == 'true'
     
-    # Database Configuration
-    GEOMETRY_DB_PATH = os.environ.get('GEOMETRY_DB_PATH', 'geometry_learning.db')
-    SESSIONS_DB_PATH = os.environ.get('SESSIONS_DB_PATH', 'sessions.db')
+    # Database Configuration - SQL Server
+    DB_CONFIG = {
+        'driver': os.environ.get('DB_DRIVER', 'SQL Server'),
+        'server': os.environ.get('DB_SERVER', 'DESKTOP-824DEOL\\SQLEXPRESS01'),
+        'database': os.environ.get('DB_DATABASE', 'AKINTOR'),
+        'trusted_connection': os.environ.get('DB_TRUSTED_CONNECTION', 'yes')
+    }
     
     # Logging Configuration
     LOG_FILE = os.environ.get('BACKEND_LOG_FILE', '../logs/backend_service.log')

@@ -3,4 +3,4 @@ Flask-Session==0.5.0
 Flask-Bcrypt==1.0.1
 requests==2.31.0
 Werkzeug==3.0.1
-pyodbc
+pyodbc==5.0.1
