@@ -1,6 +1,6 @@
 from flask import Flask, session, jsonify, request
 from flask_cors import CORS
-from geometry_manager import GeometryManager
+from sql_geometry_manager import SqlGeometryManager
 from config import Config, setup_logging
 import traceback
 
@@ -12,13 +12,13 @@ CORS(app)  # Enable CORS for frontend requests
 logger = setup_logging()
 logger.info("Backend service starting...")
 
-# Store GeometryManager instances per session
+# Store SqlGeometryManager instances per session
 # In production, consider using Redis or similar for distributed sessions
 geometry_managers = {}
 
 
 def get_manager():
-    """Get or create GeometryManager for current session"""
+    """Get or create SqlGeometryManager for current session"""
     session_id = session.get('session_id')
     if not session_id or session_id not in geometry_managers:
         logger.error(f"No geometry manager found for session: {session_id}")
@@ -41,8 +41,8 @@ def health_check():
 def start_session():
     """Initialize a new learning session"""
     try:
-        # Create new GeometryManager instance
-        manager = GeometryManager(db_path=Config.GEOMETRY_DB_PATH)
+        # Create new SqlGeometryManager instance
+        manager = SqlGeometryManager()
         
         # Generate session ID and store manager
         import uuid
@@ -346,7 +346,42 @@ def internal_error(error):
 if __name__ == '__main__':
     logger.info(f"Starting backend service on {Config.HOST}:{Config.PORT}")
     logger.info(f"Debug mode: {Config.DEBUG}")
-    logger.info(f"Database path: {Config.GEOMETRY_DB_PATH}")
+    logger.info(f"Database config: {Config.DB_CONFIG}")
+    
+    # Initialize database tables if they don't exist
+    try:
+        from create_tables import check_tables_exist, create_geometry_tables, create_sessions_table
+        from db_utils import test_connection
+        
+        logger.info("Checking database connection and tables...")
+        
+        if test_connection():
+            existing_tables = check_tables_exist()
+            
+            # Check if essential tables exist
+            required_tables = ['Triangles', 'Questions', 'Theorems']
+            missing_tables = [table for table in required_tables if table not in existing_tables]
+            
+            if missing_tables:
+                logger.info(f"Missing tables detected: {missing_tables}")
+                logger.info("Creating database tables...")
+                
+                geometry_success = create_geometry_tables()
+                sessions_success = create_sessions_table()
+                
+                if geometry_success and sessions_success:
+                    logger.info("✅ Database tables created successfully!")
+                else:
+                    logger.warning("⚠️ Some tables may not have been created properly")
+            else:
+                logger.info("✅ All required database tables exist")
+        else:
+            logger.error("❌ Cannot connect to database. Please check your SQL Server configuration.")
+            logger.error("The application will start but database operations will fail.")
+            
+    except Exception as e:
+        logger.error(f"❌ Database initialization error: {str(e)}")
+        logger.error("The application will start but database operations may fail.")
     
     app.run(
         host=Config.HOST,
