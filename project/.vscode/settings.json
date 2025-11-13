@@ -1,28 +1,28 @@
 {
     "python.defaultInterpreterPath": "python",
     "python.terminal.activateEnvironment": true,
-    
+
     // Linting
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.lintOnSave": true,
-    
+
     // Formatting
     "python.formatting.provider": "black",
     "editor.formatOnSave": false,
-    
+
     // Testing
     "python.testing.pytestEnabled": false,
     "python.testing.unittestEnabled": false,
-    
+
     // File associations
     "files.associations": {
         "*.md": "markdown",
         ".env*": "properties",
         "*.log": "log"
     },
-    
+
     // Exclude files from explorer
     "files.exclude": {
         "**/__pycache__": true,
@@ -30,7 +30,7 @@
         "**/.pytest_cache": true,
         "**/flask_session/*": true
     },
-    
+
     // Search exclusions
     "search.exclude": {
         "**/__pycache__": true,
@@ -38,56 +38,59 @@
         "**/flask_session/*": true,
         "**/logs/*.log": true
     },
-    
+
     // Auto save
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
-    
+
     // Terminal
     "terminal.integrated.defaultProfile.windows": "PowerShell",
     "terminal.integrated.cwd": "${workspaceFolder}",
-    
+
     // File watcher
     "files.watcherExclude": {
         "**/__pycache__/**": true,
         "**/flask_session/**": true,
         "**/logs/**": true
     },
-    
+
     // Editor settings
     "editor.rulers": [80, 120],
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": true,
-    
+
     // Python-specific editor settings
     "[python]": {
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
         "editor.rulers": [88, 120]
     },
-    
+
     // JSON-specific settings
     "[json]": {
         "editor.tabSize": 2,
         "editor.insertSpaces": true
     },
-    
+
     // Markdown-specific settings
     "[markdown]": {
         "editor.wordWrap": "on",
         "editor.rulers": []
     },
-    
+
     // Git
     "git.ignoreLimitWarning": true,
-    
+
     // File encoding
     "files.encoding": "utf8",
     "files.eol": "\n",
-    
+
     // Trailing whitespace
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "python-envs.pythonProjects": []
 }

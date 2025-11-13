@@ -20,26 +20,35 @@ function Start-Service {
     param(
         [string]$ServiceName,
         [string]$ServicePath,
+        [string]$VenvName,
         [string]$Color
     )
-    
+
     Write-Host "🔄 Starting $ServiceName..." -ForegroundColor $Color
-    
+
     if (Test-Path "$ServicePath\app.py") {
-        $command = "cd '$ServicePath'; python app.py"
-        Start-Process powershell -ArgumentList "-NoExit", "-Command", $command
-        Write-Host "✅ $ServiceName started in new window" -ForegroundColor Green
+        # Check if virtual environment exists
+        $venvPath = Join-Path $ServicePath $VenvName
+        if (Test-Path "$venvPath\Scripts\Activate.ps1") {
+            $command = "cd '$ServicePath'; & '.\$VenvName\Scripts\Activate.ps1'; python app.py"
+            Start-Process powershell -ArgumentList "-NoExit", "-Command", $command
+            Write-Host "✅ $ServiceName started in new window with virtual environment" -ForegroundColor Green
+        } else {
+            Write-Host "❌ Virtual environment not found at $venvPath" -ForegroundColor Red
+            Write-Host "   Please run: cd '$ServicePath' && python -m venv $VenvName && .\$VenvName\Scripts\Activate.ps1 && pip install -r requirements.txt" -ForegroundColor Yellow
+            return $false
+        }
     } else {
         Write-Host "❌ app.py not found in $ServicePath" -ForegroundColor Red
         return $false
     }
-    
+
     return $true
 }
 
 # Start Backend Service
 $backendPath = Join-Path $projectRoot "backend_service"
-$backendStarted = Start-Service -ServiceName "Backend Service" -ServicePath $backendPath -Color "Cyan"
+$backendStarted = Start-Service -ServiceName "Backend Service" -ServicePath $backendPath -VenvName "bvenv" -Color "Cyan"
 
 if (-not $backendStarted) {
     Write-Host "Failed to start Backend Service" -ForegroundColor Red
@@ -52,7 +61,7 @@ Start-Sleep -Seconds 3
 
 # Start Frontend Service
 $frontendPath = Join-Path $projectRoot "frontend_service"
-$frontendStarted = Start-Service -ServiceName "Frontend Service" -ServicePath $frontendPath -Color "Magenta"
+$frontendStarted = Start-Service -ServiceName "Frontend Service" -ServicePath $frontendPath -VenvName "fvenv" -Color "Magenta"
 
 if (-not $frontendStarted) {
     Write-Host "Failed to start Frontend Service" -ForegroundColor Red
